@@ -15,7 +15,8 @@
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
 </head>
-<body>
+
+<body class="blur-mode">
 
 <button id="hamburger" aria-label="Menu">
     <span></span>
@@ -33,7 +34,23 @@
     </ul>
 </nav>
 
-<div id="map"></div>
+<div id="localization-container">
+
+    <div id="info-box">
+        <h1>Miejsce Wesela</h1>
+        <p class="venue-name">Sala Weselna "Marzenie"</p>
+        <p>ul. Przykładowa 15</p>
+        <p>80-000 Gdańsk</p>
+        <br>
+        <p><strong>Współrzędne GPS:</strong></p>
+        <p>54.2090 N, 18.5218 E</p>
+    </div>
+
+    <div id="map-box">
+        <div id="map"></div>
+    </div>
+
+</div>
 
 <script src="map.js"></script>
 <script src="telefon.js"></script>
