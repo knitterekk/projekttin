@@ -1,0 +1,234 @@
+/* 1. Import czcionek */
+@import url('https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap');
+
+/* 2. Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Strona bez pasków przewijania */
+}
+
+/* 3. TŁO STRONY (Dynamiczne z Animacją) */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #000;
+    position: relative;
+
+    /* Wartości domyślne */
+    --bg-current: url('tlo/tlo.jpg');
+    --bg-next: url('tlo/tlo1.jpg');
+    --bg-prev: url('tlo/tlo34.jpg');
+}
+
+/* DEFINICJA ANIMACJI */
+@keyframes slideFromLeft {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Warstwa 1: Rozmyte tło (Next/Prev) */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: var(--bg-next), var(--bg-prev);
+    background-size: 50% 100%, 50% 100%;
+    background-position: left center, right center;
+    background-repeat: no-repeat;
+
+    filter: blur(15px) brightness(0.4);
+    transform: scale(1.1);
+    z-index: -2;
+}
+
+/* Warstwa 2: Ostre zdjęcie na środku (Current) */
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: var(--bg-current);
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    /* DOMYŚLNIE (Desktop): Przyklejone do dołu */
+    background-position: center bottom;
+
+    z-index: -1;
+
+    /* --- NOWOŚĆ: MASKA ZMIĘKCZAJĄCA KRAWĘDZIE --- */
+    /* Tworzymy gradient elipsoidalny: środek (do 75%) jest w pełni widoczny,
+       a krawędzie (do 99%) stają się przezroczyste. */
+    -webkit-mask-image: radial-gradient(ellipse at center, black 75%, transparent 99%);
+    mask-image: radial-gradient(ellipse at center, black 75%, transparent 99%);
+}
+
+/* Klasy animacji */
+body.anim-active::before { animation: fadeIn 1.5s ease-out forwards; }
+body.anim-active::after { animation: slideFromLeft 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+/* 4. MENU BOCZNE (Desktop - Czarne tło) */
+#side-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 250px;
+
+    background-color: #000;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 100;
+}
+
+#side-menu ul {
+    list-style: none;
+    text-align: center;
+    width: 100%;
+}
+
+#side-menu li {
+    margin: 25px 0;
+}
+
+#side-menu a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 10px;
+}
+
+#side-menu a:hover {
+    color: #fff;
+    background-color: #222;
+    transform: translateX(5px);
+}
+
+/* 5. NAPISY */
+#text-container {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #fff;
+    z-index: 10;
+    width: 100%;
+}
+
+#text-container h1 {
+    font-family: 'Mr De Haviland', cursive;
+    font-size: 5rem;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+#text-container h2 {
+    font-family: 'Mr De Haviland', cursive;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-top: 5px;
+    opacity: 0.8;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+/* 6. HAMBURGER (Mobile) */
+#hamburger {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 200;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 35px;
+    height: 30px;
+}
+
+#hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    margin: 6px 0;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+#hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+#hamburger.active span:nth-child(2) { opacity: 0; }
+#hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+/* 7. MAPA */
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* 8. RESPONSYWNOŚĆ (Mobile) */
+@media (max-width: 768px) {
+    #hamburger { display: block; }
+
+    #side-menu {
+        width: 100%;
+        height: 100vh;
+        right: 0;
+        left: auto;
+
+        background-color: #000;
+        border: none;
+
+        flex-direction: column;
+        justify-content: center;
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
+    }
+
+    #side-menu.active { transform: translateX(0); }
+    #side-menu ul { gap: 30px; display: flex; flex-direction: column; }
+    #side-menu a { font-size: 1.5rem; padding: 15px; }
+
+    #text-container { bottom: 15%; }
+    #text-container h1 { font-size: 4rem; }
+
+    /* POPRAWKA POZYCJI ZDJĘCIA NA TELEFONIE */
+    body::after {
+        background-position: center center !important;
+    }
+}
