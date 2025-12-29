@@ -1,8 +1,9 @@
-/* 1. Import czcionek */
-@import url('https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap');
+/* =========================================
+   1. IMPORT CZCIONEK I RESET
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap');
 
-/* 2. Reset */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -15,17 +16,23 @@ html, body {
     overflow: hidden;
 }
 
-/* 3. TŁO STRONY (Standardowe) */
+/* =========================================
+   2. TŁO STRONY
+   ========================================= */
 body {
     font-family: 'Segoe UI', sans-serif;
     background-color: #000;
     position: relative;
+
+    /* Zmienne */
     --bg-current: url('tlo/tlo.jpg');
     --bg-next: url('tlo/tlo1.jpg');
     --bg-prev: url('tlo/tlo34.jpg');
+
     box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
 }
 
+/* Animacje */
 @keyframes slideFromLeft {
     0% { transform: translateX(-100%); opacity: 0; }
     100% { transform: translateX(0); opacity: 1; }
@@ -36,126 +43,194 @@ body {
     100% { opacity: 1; }
 }
 
-/* Domyślne tło (dzielone) */
+/* Warstwa 1: Rozmyte tło */
 body::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
     background-image: var(--bg-next), var(--bg-prev);
     background-size: 50% 100%, 50% 100%;
     background-position: left center, right center;
     background-repeat: no-repeat;
+
     filter: blur(20px) brightness(0.4);
-    transform: scale(1.1); z-index: -2;
+    transform: scale(1.1);
+    z-index: -2;
 }
 
-/* Domyślne ostre zdjęcie */
+/* Warstwa 2: Ostre zdjęcie */
 body::after {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
     background-image: var(--bg-current);
-    background-size: contain; background-repeat: no-repeat;
-    background-position: center bottom; z-index: -1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    z-index: -1;
+
+    /* MASKA */
     -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
     mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
 }
 
+/* Klasy animacji JS */
 body.anim-active::before { animation: fadeIn 1.5s ease-out forwards; }
 body.anim-active::after { animation: slideFromLeft 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 
 
-/* --- SPECJALNY TRYB: BLUR MODE (Dla lokalizacji) --- */
-/* Te style aktywują się tylko gdy w HTML dodasz class="blur-mode" do body */
-
-/* 1. Ukrywamy ostre zdjęcie na środku */
+/* --- TRYB BLUR (Dla podstron) --- */
 body.blur-mode::after {
     display: none;
 }
 
-/* 2. Zmieniamy tło na jednolite (nie dzielone na pół) i rozmyte */
 body.blur-mode::before {
-    background-image: var(--bg-current); /* Używamy głównego zdjęcia */
-    background-size: cover; /* Rozciągamy na całość */
+    background-image: var(--bg-current);
+    background-size: cover;
     background-position: center;
-    filter: blur(25px) brightness(0.4); /* Mocny blur */
+    filter: blur(25px) brightness(0.4);
 }
 
 
-/* 4. MENU BOCZNE */
+/* =========================================
+   3. MENU BOCZNE
+   ========================================= */
 #side-menu {
-    position: fixed; left: 0; top: 0; height: 100%; width: 250px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 250px;
     background-color: #000;
     border-right: 1px solid rgba(255, 255, 255, 0.2);
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 100;
 }
-#side-menu ul { list-style: none; text-align: center; width: 100%; }
+
+#side-menu ul {
+    list-style: none;
+    text-align: center;
+    width: 100%;
+}
+
 #side-menu li { margin: 25px 0; }
+
 #side-menu a {
-    text-decoration: none; color: #fff; font-size: 1.2rem;
-    font-weight: 400; text-transform: uppercase; letter-spacing: 2px;
-    transition: all 0.3s ease; display: block; padding: 10px;
-}
-#side-menu a:hover { color: #fff; background-color: #222; transform: translateX(5px); }
-
-/* 5. NAPISY (Index) */
-#text-container {
-    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-    text-align: center; color: #fff; z-index: 10; width: 100%;
-}
-#text-container h1 {
-    font-family: 'Mr De Haviland', cursive; font-size: 5rem;
-    font-weight: 400; margin: 0; line-height: 1;
-    text-shadow: 0 4px 15px rgba(0,0,0,1);
-}
-#text-container h2 {
-    font-family: 'Mr De Haviland', cursive; font-size: 2.5rem;
-    font-weight: 400; margin-top: 5px; opacity: 0.9;
-    text-shadow: 0 4px 15px rgba(0,0,0,1);
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 10px;
 }
 
-/* 6. HAMBURGER */
+#side-menu a:hover {
+    color: #fff;
+    background-color: #222;
+    transform: translateX(5px);
+}
+
+
+/* =========================================
+   4. HAMBURGER (MOBILE)
+   ========================================= */
 #hamburger {
-    display: none; position: fixed; top: 20px; right: 20px; z-index: 200;
-    background: transparent; border: none; cursor: pointer; width: 40px; height: 40px;
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 200;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
 }
+
 #hamburger span {
-    display: block; width: 100%; height: 3px; background-color: #fff;
-    margin: 7px 0; border-radius: 2px; transition: all 0.3s ease;
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    margin: 7px 0;
+    border-radius: 2px;
+    transition: all 0.3s ease;
     box-shadow: 0 1px 4px rgba(0,0,0,1);
 }
+
 #hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 8px); }
 #hamburger.active span:nth-child(2) { opacity: 0; }
 #hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -8px); }
 
-/* 7. MAPA */
-#map { width: 100%; height: 100%; }
+
+/* =========================================
+   5. STRONA GŁÓWNA (NAPISY)
+   ========================================= */
+#text-container {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #fff;
+    z-index: 10;
+    width: 100%;
+}
+
+#text-container h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 5rem;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1;
+    text-shadow: 0 4px 15px rgba(0,0,0,1);
+}
+
+#text-container h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    font-weight: 400;
+    margin-top: 5px;
+    opacity: 0.9;
+    text-shadow: 0 4px 15px rgba(0,0,0,1);
+}
 
 
-/* --- KONTENER LOKALIZACJI (Wyśrodkowany) --- */
+/* =========================================
+   6. LOKALIZACJA (MAPA)
+   ========================================= */
 #localization-container {
     position: absolute;
-    /* Idealnie na środku */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    /* Duży rozmiar */
     width: 70%;
-    height: 70vh;
     max-width: 1100px;
-
+    height: 70vh;
     display: flex;
-    background: rgba(0, 0, 0, 0.6); /* Ciemne szkło */
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 15px;
     padding: 40px;
     color: #fff;
     z-index: 10;
-
-    /* Cień pod pudełkiem */
     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
-/* Lewa strona */
 #info-box {
     flex: 1;
     padding-right: 40px;
@@ -165,11 +240,10 @@ body.blur-mode::before {
 }
 
 #info-box h1 {
-    font-family: 'Mr De Haviland', cursive;
+    font-family: 'Great Vibes', cursive;
     font-size: 4rem;
     margin-bottom: 25px;
     color: #fff;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 #info-box p {
@@ -186,62 +260,208 @@ body.blur-mode::before {
     margin-bottom: 15px;
 }
 
-/* Prawa strona */
 #map-box {
-    flex: 1.5; /* Mapa jest szersza niż tekst */
+    flex: 1.5;
     height: 100%;
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* 8. RESPONSYWNOŚĆ (Mobile) */
+#map { width: 100%; height: 100%; }
+
+
+/* =========================================
+   7. STRONA ŚLUB (BLACK & GOLD LUXURY)
+   ========================================= */
+#paper-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 70%;
+    max-width: 1000px;
+    height: auto;
+    min-height: 60vh;
+
+    /* TŁO: Elegancka, jasna czerń (Grafit) */
+    background-color: #1f1f1f;
+
+    /* Cień zewnętrzny */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+
+    /* Ramka zewnętrzna i wewnętrzna (ZŁOTA) */
+    border: 1px solid #111;
+    outline: 1px solid #d4af37;
+    outline-offset: -15px;
+
+    /* Tekst */
+    color: #d4af37;
+
+    padding: 60px;
+    border-radius: 2px;
+
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    z-index: 10;
+}
+
+.paper-content {
+    flex: 1.5;
+    z-index: 2;
+}
+
+.paper-content h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4.5rem;
+    margin-bottom: 30px;
+    color: #d4af37;
+    line-height: 1;
+    text-align: left;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.paper-content h3 {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.9rem;
+    color: #d4af37;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+.paper-content p {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    color: #f1e5ac;
+    font-weight: 300;
+}
+
+/* ZMODYFIKOWANA SEKCJA INTRO */
+.paper-content .intro {
+    font-style: italic;
+    font-size: 1.8rem;
+    color: #d4af37;
+    font-family: 'Great Vibes', cursive;
+    font-weight: 400;
+    line-height: 1.4;
+
+    /* ZMIANA: Wyśrodkowanie tekstu */
+    text-align: center;
+}
+
+/* ZMODYFIKOWANE "TAK" */
+.big-tak {
+    display: block;
+    text-align: center;
+    /* ZMIANA: Mniejsza czcionka (było 4.5rem) */
+    font-size: 3rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #d4af37;
+    font-family: 'Great Vibes', cursive;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    margin: 30px 0;
+    width: 100%;
+}
+
+.paper-image {
+    flex: 1;
+    position: relative;
+    border: 1px solid #d4af37;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    transform: rotate(0deg);
+}
+
+.paper-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* =========================================
+   8. RESPONSYWNOŚĆ (MOBILE)
+   ========================================= */
 @media (max-width: 768px) {
     #hamburger { display: block; }
 
     #side-menu {
-        width: 100%; height: 100vh; right: 0; left: auto;
-        background-color: #000; border: none;
-        flex-direction: column; justify-content: center;
-        transform: translateX(100%); transition: transform 0.4s ease-in-out;
+        width: 100%;
+        height: 100vh;
+        right: 0;
+        left: auto;
+        background-color: #000;
+        border: none;
+        flex-direction: column;
+        justify-content: center;
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
     }
+
     #side-menu.active { transform: translateX(0); }
     #side-menu ul { gap: 30px; display: flex; flex-direction: column; }
     #side-menu a { font-size: 1.5rem; padding: 15px; }
 
-    #text-container { bottom: 20%; }
-    #text-container h1 { font-size: 4rem; }
-
+    /* GŁÓWNE ZDJĘCIE (Index) */
     body::after {
         background-position: center center !important;
         -webkit-mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
         mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
     }
 
-    /* POPRAWKI LOKALIZACJI NA TELEFONIE */
+    #text-container { bottom: 20%; }
+    #text-container h1 { font-size: 4.5rem; }
+
+    /* LOKALIZACJA (Mobile) */
     #localization-container {
         position: relative;
-        top: 80px; /* Odsunięcie od góry */
+        top: 80px;
         left: auto;
         transform: none;
         width: 90%;
         height: auto;
         margin: 0 auto 50px auto;
-        flex-direction: column-reverse; /* Mapa na górze, tekst pod spodem */
+        flex-direction: column-reverse;
         padding: 20px;
     }
 
-    #info-box {
-        padding-right: 0;
-        margin-top: 20px;
-        text-align: center;
+    #info-box { padding-right: 0; margin-top: 20px; text-align: center; }
+    #info-box h1 { font-size: 3.5rem; }
+    #map-box { width: 100%; height: 300px; flex: none; }
+
+    /* ŚLUB (Mobile) */
+    #paper-container {
+        position: relative;
+        top: 80px;
+        left: auto;
+        transform: none;
+        width: 90%;
+        margin: 0 auto 50px auto;
+        flex-direction: column;
+        padding: 40px 25px;
+        gap: 30px;
+        outline: none;
+        border: 1px solid #333;
     }
 
-    #info-box h1 { font-size: 3rem; }
+    .paper-content h1 { font-size: 4rem; text-align: center; }
+    .paper-content { text-align: center; }
 
-    #map-box {
-        width: 100%;
-        height: 300px; /* Stała wysokość mapy na telefonie */
-        flex: none;
-    }
+    /* Mniejsze TAK na telefonie */
+    .big-tak { font-size: 2.5rem; }
+
+    .paper-image { width: 100%; margin: 0 auto; border: 1px solid #d4af37; }
 }
