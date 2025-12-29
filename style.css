@@ -1,13 +1,9 @@
 /* =========================================
    1. IMPORT CZCIONEK I RESET
    ========================================= */
-/* A & P (Strona Główna) */
 @import url('https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap');
-/* Główne Nagłówki (Ślub, Galeria) */
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-/* Menu, Podtytuły, Nazwy dań */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
-/* Tekst zwykły */
 @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap');
 
 * {
@@ -19,6 +15,7 @@
 html, body {
     width: 100%;
     height: 100%;
+    /* DOMYŚLNIE (PC): Brak pasków przewijania */
     overflow: hidden;
 }
 
@@ -30,7 +27,7 @@ body {
     background-color: #000;
     position: relative;
 
-    /* ZMIANA: Zdjęcia .webp, ostatnie to tlo32 */
+    /* Zdjęcia tła */
     --bg-current: url('tlo/tlo.webp');
     --bg-next: url('tlo/tlo1.webp');
     --bg-prev: url('tlo/tlo32.webp');
@@ -119,22 +116,18 @@ body.blur-mode::before {
     position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
     text-align: center; color: #fff; z-index: 10; width: 100%;
 }
-
-/* Mr De Haviland tylko tutaj */
 #text-container h1 {
     font-family: 'Mr De Haviland', cursive;
     font-size: 7rem;
     font-weight: 400; margin: 0; line-height: 1;
     text-shadow: 0 4px 15px rgba(0,0,0,1);
 }
-
 #text-container h2 {
     font-family: 'Mr De Haviland', cursive;
     font-size: 3.5rem;
     font-weight: 400; margin-top: 5px; opacity: 0.9;
     text-shadow: 0 4px 15px rgba(0,0,0,1);
 }
-
 
 /* =========================================
    6. LOKALIZACJA
@@ -149,7 +142,6 @@ body.blur-mode::before {
 }
 #info-box { flex: 1; padding-right: 40px; display: flex; flex-direction: column; justify-content: center; }
 #info-box h1 { font-family: 'Great Vibes', cursive; font-size: 4rem; margin-bottom: 25px; color: #fff; }
-
 #info-box p { font-size: 1.2rem; line-height: 1.6; margin: 8px 0; color: #ddd; }
 #info-box .venue-name { font-weight: 600; font-size: 1.6rem; color: #fff; margin-bottom: 15px; }
 #map-box { flex: 1.5; height: 100%; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.3); }
@@ -172,14 +164,12 @@ body.blur-mode::before {
     margin-bottom: 30px; color: #d4af37; line-height: 1;
     text-align: left; text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
-
 .paper-content h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
     color: #d4af37; margin-top: 30px; margin-bottom: 10px;
     text-transform: uppercase; letter-spacing: 2px; font-weight: 400;
 }
-
 .paper-content p {
     font-family: 'Segoe UI', sans-serif; font-size: 1.1rem;
     line-height: 1.8; margin-bottom: 15px; color: #f1e5ac; font-weight: 300;
@@ -208,447 +198,209 @@ body.blur-mode::before {
 
 
 /* =========================================
-   8. RESPONSYWNOŚĆ GLOBALNA (MOBILE)
+   8. SEKCJA MENU I ATRAKCJE (menu.html)
    ========================================= */
-@media (max-width: 768px) {
-
-    /* --- NAPRAWA PRZEWIJANIA NA TELEFONIE --- */
-    html, body {
-        overflow-y: auto !important; /* Odblokowuje przewijanie pionowe */
-        height: auto !important;     /* Pozwala stronie rosnąć w dół */
-        min-height: 100%;            /* Gwarantuje, że tło pokryje całość */
-        -webkit-overflow-scrolling: touch; /* Płynne przewijanie na iPhone */
-    }
-
-    /* Tło na telefonie musi być "fixed", żeby nie ucinało go przy przewijaniu */
-    body::before, body::after {
-        position: fixed !important;
-        height: 100vh !important;
-    }
-
-    /* --- Reszta stylów mobilnych bez zmian --- */
-    #hamburger { display: block; }
-
-    #side-menu {
-        width: 100%; height: 100vh; right: 0; left: auto;
-        background-color: #000; border: none; flex-direction: column;
-        justify-content: center; transform: translateX(100%); transition: transform 0.4s ease-in-out;
-        position: fixed; /* Menu musi być fixed, żeby nie uciekało przy przewijaniu */
-    }
-    #side-menu.active { transform: translateX(0); }
-    #side-menu ul { gap: 30px; display: flex; flex-direction: column; }
-    #side-menu a { font-size: 1.5rem; padding: 15px; }
-
-    body::after {
-        background-position: center center !important;
-        -webkit-mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
-        mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
-    }
-
-    #text-container { bottom: 20%; }
-    #text-container h1 { font-size: 6rem; }
-
-    #localization-container {
-        position: relative; top: 80px; left: auto; transform: none;
-        width: 90%; height: auto; margin: 0 auto 50px auto;
-        flex-direction: column-reverse; padding: 20px;
-    }
-    #info-box { padding-right: 0; margin-top: 20px; text-align: center; }
-    #info-box h1 { font-size: 3.5rem; }
-    #map-box { width: 100%; height: 300px; flex: none; }
-
-    /* Ogólny styl kontenera kartki na mobile */
-    #paper-container {
-        position: relative; top: 80px; left: auto; transform: none;
-        width: 90%; margin: 0 auto 50px auto; flex-direction: column;
-        padding: 40px 25px; gap: 30px; outline: none; border: 1px solid #333;
-    }
-    .paper-content h1 { font-size: 4rem; text-align: center; }
-    .paper-content { text-align: center; }
-    .big-tak { font-size: 2.5rem; }
-    .paper-image { width: 100%; margin: 0 auto; border: 1px solid #d4af37; }
-
-    /* Menu Mobile */
-    #paper-container.menu-layout {
-        flex-direction: column;
-        gap: 30px;
-        padding: 30px 20px;
-    }
-    .menu-column-left {
-        width: 100%;
-        padding-right: 0;
-        border-right: none;
-        border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-        padding-bottom: 30px;
-    }
-    .menu-column-right { width: 100%; padding-left: 0; }
-    .sala-image-right { width: 100%; margin-top: 20px; }
-    .menu-column-left h1, .menu-column-right h1 { font-size: 3rem; }
-
-    /* Galeria Mobile */
-    .gallery-grid {
-        gap: 30px;
-        flex-direction: column;
-        align-items: center;
-    }
-    .arrow.prev { left: -10px; background: rgba(0,0,0,0.5); border-radius: 50%; padding: 5px 10px; font-size: 1.5rem; }
-    .arrow.next { right: -10px; background: rgba(0,0,0,0.5); border-radius: 50%; padding: 5px 10px; font-size: 1.5rem; }
-
-    #box-my .slider-wrapper { height: 400px; width: 280px; }
-
-    /* Modal Mobile */
-    .modal-scroll-container {
-        flex-wrap: nowrap;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        padding-top: 80px;
-        gap: 30px;
-    }
-    .modal-scroll-container img {
-        height: auto;
-        width: 90%;
-        max-width: none;
-        max-height: none;
-    }
-}
-
-
-/* =========================================
-   9. SEKCJA MENU I ATRAKCJE (menu.html)
-   ========================================= */
-
 #paper-container.menu-layout {
     align-items: flex-start;
     min-height: 80vh;
     padding: 50px;
     flex-wrap: wrap;
 }
-
-/* LEWA KOLUMNA (JEDZENIE) */
 .menu-column-left {
-    flex: 1 1 45%;
-    padding-right: 40px;
-    border-right: 1px solid rgba(212, 175, 55, 0.3);
-    text-align: center;
+    flex: 1 1 45%; padding-right: 40px; border-right: 1px solid rgba(212, 175, 55, 0.3); text-align: center;
 }
-
-.menu-column-left h1,
-.menu-column-right h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 3.5rem;
-    color: #d4af37;
-    margin-bottom: 30px;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    line-height: 1;
+.menu-column-left h1, .menu-column-right h1 {
+    font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #d4af37; margin-bottom: 30px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); line-height: 1;
 }
-
 .menu-section h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    color: #d4af37;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-    font-weight: 400;
-    font-style: italic;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-    display: inline-block;
-    padding-bottom: 2px;
+    font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #d4af37; letter-spacing: 1px;
+    margin-bottom: 8px; font-weight: 400; font-style: italic; border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    display: inline-block; padding-bottom: 2px;
 }
-
 .dish-name {
-    font-family: 'Playfair Display', serif !important;
-    font-weight: 600 !important;
-    color: #cbb470 !important;
-    font-size: 1.1rem !important;
-    margin-bottom: 2px !important;
-    margin-top: 10px;
+    font-family: 'Playfair Display', serif !important; font-weight: 600 !important; color: #cbb470 !important;
+    font-size: 1.1rem !important; margin-bottom: 2px !important; margin-top: 10px;
 }
-
 .menu-section p {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 0.95rem;
-    color: #f1e5ac;
-    line-height: 1.5;
-    margin: 0;
-    font-weight: 300;
+    font-family: 'Segoe UI', sans-serif; font-size: 0.95rem; color: #f1e5ac; line-height: 1.5; margin: 0; font-weight: 300;
 }
-
 .separator-small {
-    width: 30%; height: 1px;
-    background: rgba(212, 175, 55, 0.3); margin: 20px auto;
+    width: 30%; height: 1px; background: rgba(212, 175, 55, 0.3); margin: 20px auto;
 }
-
-/* PRAWA KOLUMNA (ATRAKCJE) */
 .menu-column-right {
-    flex: 1 1 45%;
-    padding-left: 40px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+    flex: 1 1 45%; padding-left: 40px; display: flex; flex-direction: column; text-align: center;
 }
-
 .attraction-text h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    color: #d4af37;
-    margin-top: 20px;
-    margin-bottom: 5px;
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #d4af37; margin-top: 20px;
+    margin-bottom: 5px; font-weight: 600; letter-spacing: 1px;
 }
-
 .attraction-text p {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 1rem;
-    color: #f1e5ac;
-    line-height: 1.4;
-    font-weight: 300;
+    font-family: 'Segoe UI', sans-serif; font-size: 1rem; color: #f1e5ac; line-height: 1.4; font-weight: 300;
 }
-
-/* ZDJĘCIE W PRAWEJ KOLUMNIE */
 .sala-image-right {
-    width: 100%;
-    margin-top: 30px;
-    position: relative;
-    border: 1px solid #d4af37;
-    padding: 3px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
+    width: 100%; margin-top: 30px; position: relative; border: 1px solid #d4af37;
+    padding: 3px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); display: flex; justify-content: center;
 }
-
 .sala-image-right img {
-    width: 100%;
-    max-height: 350px;
-    object-fit: cover;
-    display: block;
-    opacity: 0.95;
-}
-
-/* Responsywność Menu */
-@media (max-width: 768px) {
-    #paper-container.menu-layout {
-        flex-direction: column;
-        gap: 30px;
-        padding: 30px 20px;
-    }
-    .menu-column-left {
-        width: 100%;
-        padding-right: 0;
-        border-right: none;
-        border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-        padding-bottom: 30px;
-    }
-    .menu-column-right { width: 100%; padding-left: 0; }
-    .sala-image-right { width: 100%; margin-top: 20px; }
-    .menu-column-left h1, .menu-column-right h1 { font-size: 3rem; }
+    width: 100%; max-height: 350px; object-fit: cover; display: block; opacity: 0.95;
 }
 
 
 /* =========================================
-   10. GALERIA (gallery.html)
+   9. GALERIA (gallery.html)
    ========================================= */
-
 #paper-container.gallery-layout {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    height: auto;
-    min-height: 80vh;
+    flex-direction: column; align-items: center; justify-content: center;
+    padding: 40px; height: auto; min-height: 80vh;
 }
-
 #paper-container.gallery-layout h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 4rem;
-    color: #d4af37;
-    margin-bottom: 50px;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    font-family: 'Great Vibes', cursive; font-size: 4rem; color: #d4af37;
+    margin-bottom: 50px; text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
-
-/* Siatka dla boksów */
 .gallery-grid {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end; /* Wyrównanie do dołu */
-    gap: 80px;
-    width: 100%;
-    flex-wrap: wrap;
+    display: flex; justify-content: center; align-items: flex-end; gap: 80px; width: 100%; flex-wrap: wrap;
 }
-
-/* --- POJEDYNCZY BOKS --- */
 .gallery-box {
-    width: 300px;
-    height: auto;
-    background: transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    margin-bottom: 20px;
+    width: 300px; height: auto; background: transparent; display: flex; flex-direction: column;
+    align-items: center; position: relative; margin-bottom: 20px;
 }
-
 .gallery-box h3 {
-    font-family: 'Playfair Display', serif;
-    color: #d4af37;
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-family: 'Playfair Display', serif; color: #d4af37; font-size: 1.3rem; margin-bottom: 15px;
+    text-transform: uppercase; letter-spacing: 2px;
 }
-
-/* --- RAMKI ZDJĘĆ --- */
 .slider-wrapper {
-    width: 100%;
-    height: 200px; /* Poziome zdjęcie */
-    position: relative;
-    border: 1px solid #d4af37;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-    overflow: hidden;
-    background-color: #000;
+    width: 100%; height: 200px; position: relative; border: 1px solid #d4af37;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5); overflow: hidden; background-color: #000;
 }
-
-/* SPECJALNA RAMKA DLA "MY" (PIONOWA) */
-#box-my .slider-wrapper {
-    height: 450px;
-    width: 300px;
-}
-
+#box-my .slider-wrapper { height: 450px; width: 300px; }
 .slide-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    cursor: pointer;
-    transition: transform 0.5s ease;
-    opacity: 1; /* Dla efektu fade w JS */
-    transition: opacity 0.2s ease-in-out;
+    width: 100%; height: 100%; object-fit: cover; cursor: pointer; transition: transform 0.5s ease, opacity 0.2s ease-in-out; opacity: 1;
 }
-
-.slide-img:hover {
-    transform: scale(1.05);
-}
-
-/* --- STRZAŁKI NA ZEWNĄTRZ --- */
+.slide-img:hover { transform: scale(1.05); }
 .arrow {
-    position: absolute;
-    top: 60%;
-    transform: translateY(-50%);
-    background-color: transparent;
-    color: #d4af37;
-    border: none;
-    font-size: 2.5rem;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
+    position: absolute; top: 60%; transform: translateY(-50%); background-color: transparent;
+    color: #d4af37; border: none; font-size: 2.5rem; padding: 10px; cursor: pointer; z-index: 10;
     transition: transform 0.2s, color 0.2s;
 }
-
 .arrow.prev { left: -50px; }
 .arrow.next { right: -50px; }
-
-.arrow:hover {
-    color: #fff;
-    transform: translateY(-50%) scale(1.2);
-}
-
+.arrow:hover { color: #fff; transform: translateY(-50%) scale(1.2); }
 #box-my .arrow { top: 55%; }
 
-
-/* --- MODAL (PC: 2 RZĘDY) --- */
+/* Modal */
 #gallery-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    background-color: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(8px);
-
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.95); backdrop-filter: blur(8px);
+    justify-content: center; align-items: center; padding: 20px;
 }
-
 .modal-scroll-container {
-    display: flex;
-    flex-wrap: wrap; /* Pozwala na łamanie linii = 2 rzędy */
-    justify-content: center;
-    align-content: center;
-    gap: 30px;
-
-    width: 100%;
-    height: 100%;
-    overflow-y: auto; /* Przewijanie jeśli się nie zmieści */
-    padding: 40px;
-
-    scrollbar-width: thin;
-    scrollbar-color: #d4af37 #111;
+    display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: 30px;
+    width: 100%; height: 100%; overflow-y: auto; padding: 40px; scrollbar-width: thin; scrollbar-color: #d4af37 #111;
 }
-
 .modal-scroll-container img {
-    /* PC: Wysokość 40% ekranu. 40% + 40% + odstępy = ok. 100%, czyli 2 rzędy */
-    height: 40vh;
-    width: auto;
-    max-width: 45%; /* Maksymalnie połowa szerokości */
-
-    object-fit: contain;
-    border: 1px solid #d4af37;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-    border-radius: 2px;
-
-    animation: fadeIn 0.4s ease-out;
+    height: 40vh; width: auto; max-width: 45%; object-fit: contain; border: 1px solid #d4af37;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5); border-radius: 2px; animation: fadeIn 0.4s ease-out;
 }
-
-/* Przycisk X */
 #close-modal {
-    position: absolute;
-    top: 20px;
-    right: 40px;
-    font-size: 4rem;
-    color: #888;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: 10000;
-    line-height: 1;
-    transition: 0.3s;
+    position: absolute; top: 20px; right: 40px; font-size: 4rem; color: #888; background: transparent;
+    border: none; cursor: pointer; z-index: 10000; line-height: 1; transition: 0.3s;
 }
-
 #close-modal:hover { color: #d4af37; transform: rotate(90deg); }
 
 
-/* --- RESPONSYWNOŚĆ --- */
+/* =========================================
+   10. RESPONSYWNOŚĆ (MOBILE) - NAPRAWA
+   ========================================= */
 @media (max-width: 768px) {
-    .gallery-grid {
-        gap: 30px;
-        flex-direction: column;
-        align-items: center;
+
+    /* 1. ODBLOKOWANIE PRZEWIJANIA (Kluczowe!) */
+    html, body {
+        width: 100%;
+        height: auto !important; /* Pozwól stronie rosnąć */
+        overflow-y: auto !important; /* Pasek przewijania */
+        overflow-x: hidden; /* Brak paska poziomego */
+        position: static !important;
+        -webkit-overflow-scrolling: touch;
     }
 
-    /* Strzałki bliżej na telefonie */
+    /* Tło musi być fixed, żeby nie znikało przy przewijaniu */
+    body::before, body::after {
+        position: fixed !important;
+        height: 100vh !important;
+        top: 0; left: 0; width: 100%;
+    }
+
+    /* 2. MENU HAMBURGER */
+    #hamburger { display: block; }
+
+    #side-menu {
+        width: 100%; height: 100vh; right: 0; left: auto;
+        background-color: #000; border: none; flex-direction: column;
+        justify-content: center; transform: translateX(100%); transition: transform 0.4s ease-in-out;
+        position: fixed; top: 0; /* Menu zawsze na wierzchu */
+    }
+    #side-menu.active { transform: translateX(0); }
+    #side-menu ul { gap: 30px; display: flex; flex-direction: column; }
+    #side-menu a { font-size: 1.5rem; padding: 15px; }
+
+    /* 3. DOSTOSOWANIE KONTENERÓW (Żeby nie były ucięte) */
+
+    /* Usuwamy centrowanie absolutne na rzecz zwykłego flow */
+    #paper-container,
+    #localization-container {
+        position: relative !important; /* Ważne! */
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+
+        width: 90% !important;
+        height: auto !important;
+        margin: 100px auto 50px auto !important; /* Margines góra/dół */
+
+        flex-direction: column;
+        padding: 40px 25px;
+        gap: 30px;
+        outline: none;
+        border: 1px solid #333;
+    }
+
+    #text-container { bottom: 20%; position: absolute; } /* Na głównej zostaje absolute */
+    #text-container h1 { font-size: 6rem; }
+
+    /* Lokalizacja */
+    #localization-container { flex-direction: column-reverse; padding: 20px; }
+    #info-box { padding-right: 0; margin-top: 20px; text-align: center; }
+    #info-box h1 { font-size: 3.5rem; }
+    #map-box { width: 100%; height: 300px; flex: none; }
+
+    /* Ślub */
+    .paper-content h1 { font-size: 4rem; text-align: center; }
+    .paper-content { text-align: center; }
+    .big-tak { font-size: 2.5rem; }
+    .paper-image { width: 100%; margin: 0 auto; border: 1px solid #d4af37; }
+
+    /* Menu */
+    #paper-container.menu-layout { padding: 30px 20px; }
+    .menu-column-left {
+        width: 100%; padding-right: 0; border-right: none;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 30px;
+    }
+    .menu-column-right { width: 100%; padding-left: 0; }
+    .sala-image-right { width: 100%; margin-top: 20px; }
+    .menu-column-left h1, .menu-column-right h1 { font-size: 3rem; }
+
+    /* Galeria */
+    .gallery-grid { gap: 30px; flex-direction: column; align-items: center; }
     .arrow.prev { left: -10px; background: rgba(0,0,0,0.5); border-radius: 50%; padding: 5px 10px; font-size: 1.5rem; }
     .arrow.next { right: -10px; background: rgba(0,0,0,0.5); border-radius: 50%; padding: 5px 10px; font-size: 1.5rem; }
-
     #box-my .slider-wrapper { height: 400px; width: 280px; }
 
-    /* --- MODAL (MOBILE: JEDNO POD DRUGIM) --- */
+    /* Modal na telefonie (Pionowo) */
     .modal-scroll-container {
-        flex-wrap: nowrap; /* Wyłączamy rzędy */
-        flex-direction: column; /* Wymuszamy pion */
-        justify-content: flex-start; /* Od góry */
-        align-items: center;
-
-        padding-top: 80px; /* Miejsce na X */
-        gap: 30px;
+        flex-wrap: nowrap; flex-direction: column; justify-content: flex-start;
+        align-items: center; padding-top: 80px; gap: 30px;
     }
-
     .modal-scroll-container img {
-        height: auto; /* Wysokość automatyczna */
-        width: 90%;   /* Szerokość prawie całego ekranu */
-        max-width: none;
-        max-height: none;
+        height: auto; width: 90%; max-width: none; max-height: none;
     }
 }
