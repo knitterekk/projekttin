@@ -30,7 +30,7 @@ body {
     /* Zdjęcia tła (.webp) */
     --bg-current: url('tlo/tlo.webp');
     --bg-next: url('tlo/tlo1.webp');
-    --bg-prev: url('tlo/tlo32.webp'); /* Ostatnie zdjęcie */
+    --bg-prev: url('tlo/tlo32.webp');
 
     box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
 }
@@ -287,7 +287,7 @@ body.blur-mode::before {
 .arrow:hover { color: #fff; transform: translateY(-50%) scale(1.2); }
 #box-my .arrow { top: 55%; }
 
-/* Modal - PODGLĄD (Domyślnie PC: 2 rzędy) */
+/* Modal */
 #gallery-modal {
     display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;
     background-color: rgba(0, 0, 0, 0.95); backdrop-filter: blur(8px);
@@ -313,11 +313,11 @@ body.blur-mode::before {
    ========================================= */
 @media (max-width: 768px) {
 
-    /* 1. ODBLOKOWANIE PRZEWIJANIA (Kluczowe dla telefonu!) */
+    /* 1. ODBLOKOWANIE PRZEWIJANIA */
     html, body {
         width: 100%;
         height: auto !important;
-        overflow-y: auto !important; /* Pasek przewijania */
+        overflow-y: auto !important;
         overflow-x: hidden;
         position: static !important;
         -webkit-overflow-scrolling: touch;
@@ -343,7 +343,20 @@ body.blur-mode::before {
     #side-menu ul { gap: 30px; display: flex; flex-direction: column; }
     #side-menu a { font-size: 1.5rem; padding: 15px; }
 
-    /* 3. DOSTOSOWANIE KONTENERÓW */
+    /* 3. NAPRAWA TEKSTU NA GŁÓWNEJ (index.html) */
+    #text-container {
+        /* Wymuszamy, żeby napis był przyklejony do dołu ekranu i widoczny */
+        position: fixed !important;
+        bottom: 25% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100%;
+        z-index: 50; /* Zawsze na wierzchu */
+        display: block !important;
+    }
+    #text-container h1 { font-size: 5rem; } /* Trochę mniejszy dla bezpieczeństwa */
+
+    /* 4. DOSTOSOWANIE KONTENERÓW (Lokalizacja, Ślub, Menu) */
     #paper-container,
     #localization-container {
         position: relative !important;
@@ -353,9 +366,6 @@ body.blur-mode::before {
         flex-direction: column; padding: 40px 25px;
         gap: 30px; outline: none; border: 1px solid #333;
     }
-
-    #text-container { bottom: 20%; position: absolute; }
-    #text-container h1 { font-size: 6rem; }
 
     #localization-container { flex-direction: column-reverse; padding: 20px; }
     #info-box { padding-right: 0; margin-top: 20px; text-align: center; }
@@ -367,7 +377,7 @@ body.blur-mode::before {
     .big-tak { font-size: 2.5rem; }
     .paper-image { width: 100%; margin: 0 auto; border: 1px solid #d4af37; }
 
-    /* Menu Layout Mobile */
+    /* Menu Layout */
     #paper-container.menu-layout { padding: 30px 20px; }
     .menu-column-left {
         width: 100%; padding-right: 0; border-right: none;
@@ -377,40 +387,24 @@ body.blur-mode::before {
     .sala-image-right { width: 100%; margin-top: 20px; }
     .menu-column-left h1, .menu-column-right h1 { font-size: 3rem; }
 
-    /* --- GALERIA MOBILE (Wyśrodkowanie) --- */
+    /* Galeria (Wyśrodkowanie) */
     .gallery-grid {
-        display: flex;
-        flex-direction: column; /* Pionowo */
-        align-items: center;    /* Centrowanie w poziomie */
-        justify-content: center;
-        width: 100%;
-        gap: 50px;
-        margin: 0 auto;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        width: 100%; gap: 50px; margin: 0 auto;
     }
-
     .gallery-box {
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 20px;
-        width: 100%;
-        max-width: 300px;
+        margin-left: auto; margin-right: auto; margin-bottom: 20px;
+        width: 100%; max-width: 300px;
     }
-
-    /* Strzałki bliżej na telefonie */
     .arrow.prev {
-        left: -15px; background: rgba(0,0,0,0.6);
-        border-radius: 50%; padding: 8px 13px; font-size: 1.5rem;
+        left: -15px; background: rgba(0,0,0,0.6); border-radius: 50%; padding: 8px 13px; font-size: 1.5rem;
     }
     .arrow.next {
-        right: -15px; background: rgba(0,0,0,0.6);
-        border-radius: 50%; padding: 8px 13px; font-size: 1.5rem;
+        right: -15px; background: rgba(0,0,0,0.6); border-radius: 50%; padding: 8px 13px; font-size: 1.5rem;
     }
+    #box-my .slider-wrapper { height: 400px; width: 100%; max-width: 300px; }
 
-    #box-my .slider-wrapper {
-        height: 400px; width: 100%; max-width: 300px;
-    }
-
-    /* Modal Mobile (Pionowo, przewijane) */
+    /* Modal Mobile */
     .modal-scroll-container {
         flex-wrap: nowrap; flex-direction: column; justify-content: flex-start;
         align-items: center; padding-top: 80px; gap: 30px;
