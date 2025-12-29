@@ -113,7 +113,10 @@ body.blur-mode::before {
    5. STRONA GŁÓWNA (A & P)
    ========================================= */
 #text-container {
-    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    position: absolute; bottom: 30px;
+    /* POPRAWKA: Przesuwamy środek o 125px w prawo (żeby ominąć menu) */
+    left: calc(50% + 125px);
+    transform: translateX(-50%);
     text-align: center; color: #fff; z-index: 10; width: 100%;
 }
 #text-container h1 {
@@ -133,7 +136,11 @@ body.blur-mode::before {
    6. LOKALIZACJA
    ========================================= */
 #localization-container {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    position: absolute; top: 50%;
+    /* POPRAWKA: Przesuwamy środek o 125px w prawo */
+    left: calc(50% + 125px);
+    transform: translate(-50%, -50%);
+
     width: 70%; max-width: 1100px; height: 70vh;
     display: flex; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 15px;
@@ -148,10 +155,14 @@ body.blur-mode::before {
 #map { width: 100%; height: 100%; }
 
 /* =========================================
-   7. STRONA ŚLUB (about.html)
+   7. STRONA ŚLUB (about.html) I INNE PODSTRONY
    ========================================= */
 #paper-container {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    position: absolute; top: 50%;
+    /* POPRAWKA: Przesuwamy środek o 125px w prawo */
+    left: calc(50% + 125px);
+    transform: translate(-50%, -50%);
+
     width: 70%; max-width: 1000px; height: auto; min-height: 60vh;
     background-color: #1f1f1f; box-shadow: 0 20px 50px rgba(0,0,0,0.8);
     border: 1px solid #111; outline: 1px solid #d4af37; outline-offset: -15px;
@@ -348,19 +359,23 @@ body.blur-mode::before {
         /* Wymuszamy, żeby napis był przyklejony do dołu ekranu i widoczny */
         position: fixed !important;
         bottom: 25% !important;
-        left: 50% !important;
+        left: 50% !important; /* Na mobile wracamy do środka ekranu */
         transform: translateX(-50%) !important;
         width: 100%;
-        z-index: 50; /* Zawsze na wierzchu */
+        z-index: 50;
         display: block !important;
     }
-    #text-container h1 { font-size: 5rem; } /* Trochę mniejszy dla bezpieczeństwa */
+    #text-container h1 { font-size: 5rem; }
 
     /* 4. DOSTOSOWANIE KONTENERÓW (Lokalizacja, Ślub, Menu) */
     #paper-container,
     #localization-container {
         position: relative !important;
-        top: auto !important; left: auto !important; transform: none !important;
+        /* RESETUJEMY lewo na "auto" lub środek, bo menu znika */
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+
         width: 90% !important; height: auto !important;
         margin: 100px auto 50px auto !important;
         flex-direction: column; padding: 40px 25px;

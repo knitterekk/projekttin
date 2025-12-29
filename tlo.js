@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Dodaj pierwsze zdjęcie
     images.push('tlo/tlo.webp');
 
-    // Dodaj kolejne zdjęcia (TERAZ TYLKO DO 32)
+    // Dodaj kolejne zdjęcia
     const numberedImagesCount = 32;
 
     for (let i = 1; i <= numberedImagesCount; i++) {
