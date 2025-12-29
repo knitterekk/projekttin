@@ -1,10 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informacje dla gości - Agata i Patryk</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
+<body class="blur-mode">
+
+<button id="hamburger" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<nav id="side-menu">
+    <ul>
+        <li><a href="index.html">Główna</a></li>
+        <li><a href="about.html">Ślub</a></li>
+        <li><a href="localization.html">Lokalizacja</a></li>
+        <li><a href="menu.html">Informacje dla gości</a></li>
+        <li><a href="gallery.html">Galeria</a></li>
+    </ul>
+</nav>
+
+<div id="paper-container" class="menu-layout">
+
+    <div class="menu-column-left">
+        <h1>Karta Dań</h1>
+
+        <div class="menu-section">
+            <h3>Uroczysty Obiad</h3>
+
+            <p class="dish-name">Zupa</p>
+            <p>Rosół z kury zagrodowej z domowym makaronem</p>
+
+            <p class="dish-name">Danie Główne</p>
+            <p>Polędwiczki wieprzowe w sosie kurkowym, ziemniaczki opiekane, bukiet surówek</p>
+        </div>
+
+        <div class="separator-small"></div>
+
+        <div class="menu-section">
+            <h3>Deser</h3>
+            <p class="dish-name">Specjalność Szefa Kuchni</p>
+            <p>Puchar lodowy z gorącymi malinami i bitą śmietaną</p>
+        </div>
+
+        <div class="separator-small"></div>
+
+        <div class="menu-section">
+            <h3>Zimna Płyta</h3>
+            <p>
+                Półmiski mięs pieczonych, deska serów, tymbaliki drobiowe,
+                śledzik w śmietanie, sałatka grecka, pieczywo
+            </p>
+        </div>
+
+        <div class="separator-small"></div>
+
+        <div class="menu-section">
+            <h3>Ciepłe Kolacje</h3>
+            <p class="dish-name">Godzina 22:00</p>
+            <p>Płonąca szynka z kaszą i kapustą</p>
+
+            <p class="dish-name">Godzina 01:00</p>
+            <p>Barszcz czerwony z pasztecikiem</p>
+        </div>
+    </div>
+
+    <div class="menu-column-right">
+        <h1>Atrakcje Weselne</h1>
+
+        <div class="attraction-text">
+            <h3>Muzyka</h3>
+            <p>O szampańską zabawę do białego rana zadba profesjonalny <strong>DJ Marco</strong>.</p>
+
+            <h3>Drink Bar</h3>
+            <p>Nielimitowany open bar z autorskimi koktajlami serwowanymi przez naszych barmanów.</p>
+
+            <h3>Słodki Stół</h3>
+            <p>Kącik słodkości z mini-deserami, fontanną czekoladową i świeżymi owocami.</p>
+
+            <h3>Fotobudka</h3>
+            <p>Pamiątkowe zdjęcia dostępne od godziny 20:00 do 23:00.</p>
+        </div>
+
+        <div class="sala-image-right">
+            <img src="sala.webp" alt="Sala Weselna">
+        </div>
+    </div>
+
+</div>
+
+<script src="telefon.js"></script>
+<script src="tlo.js"></script>
 
 </body>
 </html>

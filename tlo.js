@@ -3,20 +3,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // 1. Generowanie tablicy zdjęć
     const images = [];
 
-    // Dodajemy pierwsze zdjęcie (bez numerka)
-    images.push('tlo/tlo.jpg');
+    // Dodaj pierwsze zdjęcie
+    images.push('tlo/tlo.webp');
 
-    // Dodajemy pętlą pozostałe 34 zdjęcia
-    const numberedImagesCount = 34;
+    // Dodaj kolejne zdjęcia (TERAZ TYLKO DO 32)
+    const numberedImagesCount = 32;
 
     for (let i = 1; i <= numberedImagesCount; i++) {
-        images.push(`tlo/tlo${i}.jpg`);
+        images.push(`tlo/tlo${i}.webp`);
     }
 
-    // ZMIANA: Czas ustawiony na 10 sekund (10000 ms)
-    const intervalTime = 10000;
+    const intervalTime = 10000; // 10 sekund
 
-    // 2. Logika zmiany tła
+    // 2. Logika zmiany
     let currentIndex = 0;
     const totalImages = images.length;
 
@@ -28,36 +27,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function changeBackground() {
         const currentImg = images[currentIndex];
-
         const nextIndex = (currentIndex + 1) % totalImages;
         const nextImg = images[nextIndex];
-
         const prevIndex = (currentIndex - 1 + totalImages) % totalImages;
         const prevImg = images[prevIndex];
 
-        // --- RESETOWANIE ANIMACJI ---
-
-        // 1. Usuwamy klasę
+        // Reset animacji
         document.body.classList.remove('anim-active');
+        void document.body.offsetWidth; // Wymuszenie odświeżenia
 
-        // 2. Wymuszamy przeliczenie stylów (Reflow)
-        void document.body.offsetWidth;
-
-        // 3. Podmieniamy zdjęcia
         setBackgroundTheme(prevImg, currentImg, nextImg);
 
-        // 4. Dodajemy klasę ponownie -> uruchamia animację
         document.body.classList.add('anim-active');
 
-        // Przesunięcie indeksu
         currentIndex = nextIndex;
     }
 
-    // 3. Uruchomienie
+    // 3. Start
     if (totalImages >= 3) {
         changeBackground();
         setInterval(changeBackground, intervalTime);
     } else {
-        console.error("Za mało zdjęć w tablicy! Wymagane minimum 3.");
+        console.error("Za mało zdjęć!");
     }
 });
