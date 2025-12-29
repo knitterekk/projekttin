@@ -1,9 +1,13 @@
 /* =========================================
    1. IMPORT CZCIONEK I RESET
    ========================================= */
+/* A & P (Strona Główna) */
 @import url('https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap');
+/* Główne Nagłówki (Ślub, Galeria) */
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+/* Menu, Podtytuły, Nazwy dań */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+/* Tekst zwykły */
 @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap');
 
 * {
@@ -26,7 +30,7 @@ body {
     background-color: #000;
     position: relative;
 
-    /* ZMIANA: Wszystkie tła na .webp */
+    /* ZMIANA: Zdjęcia .webp, ostatnie to tlo32 */
     --bg-current: url('tlo/tlo.webp');
     --bg-next: url('tlo/tlo1.webp');
     --bg-prev: url('tlo/tlo32.webp');
@@ -116,7 +120,7 @@ body.blur-mode::before {
     text-align: center; color: #fff; z-index: 10; width: 100%;
 }
 
-/* Mr De Haviland dla A&P */
+/* Mr De Haviland tylko tutaj */
 #text-container h1 {
     font-family: 'Mr De Haviland', cursive;
     font-size: 7rem;
@@ -152,7 +156,7 @@ body.blur-mode::before {
 #map { width: 100%; height: 100%; }
 
 /* =========================================
-   7. STRONA ŚLUB
+   7. STRONA ŚLUB (about.html)
    ========================================= */
 #paper-container {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -201,6 +205,51 @@ body.blur-mode::before {
     box-shadow: 0 5px 20px rgba(0,0,0,0.5); transform: rotate(0deg);
 }
 .paper-image img { width: 100%; height: auto; display: block; }
+
+
+/* =========================================
+   8. RESPONSYWNOŚĆ GLOBALNA (MOBILE)
+   ========================================= */
+@media (max-width: 768px) {
+    #hamburger { display: block; }
+    #side-menu {
+        width: 100%; height: 100vh; right: 0; left: auto;
+        background-color: #000; border: none; flex-direction: column;
+        justify-content: center; transform: translateX(100%); transition: transform 0.4s ease-in-out;
+    }
+    #side-menu.active { transform: translateX(0); }
+    #side-menu ul { gap: 30px; display: flex; flex-direction: column; }
+    #side-menu a { font-size: 1.5rem; padding: 15px; }
+
+    body::after {
+        background-position: center center !important;
+        -webkit-mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
+        mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
+    }
+
+    #text-container { bottom: 20%; }
+    #text-container h1 { font-size: 6rem; }
+
+    #localization-container {
+        position: relative; top: 80px; left: auto; transform: none;
+        width: 90%; height: auto; margin: 0 auto 50px auto;
+        flex-direction: column-reverse; padding: 20px;
+    }
+    #info-box { padding-right: 0; margin-top: 20px; text-align: center; }
+    #info-box h1 { font-size: 3.5rem; }
+    #map-box { width: 100%; height: 300px; flex: none; }
+
+    /* Ogólny styl kontenera kartki na mobile */
+    #paper-container {
+        position: relative; top: 80px; left: auto; transform: none;
+        width: 90%; margin: 0 auto 50px auto; flex-direction: column;
+        padding: 40px 25px; gap: 30px; outline: none; border: 1px solid #333;
+    }
+    .paper-content h1 { font-size: 4rem; text-align: center; }
+    .paper-content { text-align: center; }
+    .big-tak { font-size: 2.5rem; }
+    .paper-image { width: 100%; margin: 0 auto; border: 1px solid #d4af37; }
+}
 
 
 /* =========================================
@@ -268,7 +317,6 @@ body.blur-mode::before {
     background: rgba(212, 175, 55, 0.3); margin: 20px auto;
 }
 
-
 /* PRAWA KOLUMNA (ATRAKCJE) */
 .menu-column-right {
     flex: 1 1 45%;
@@ -316,56 +364,13 @@ body.blur-mode::before {
     opacity: 0.95;
 }
 
-
-/* =========================================
-   8. RESPONSYWNOŚĆ (MOBILE)
-   ========================================= */
+/* Responsywność Menu */
 @media (max-width: 768px) {
-    #hamburger { display: block; }
-    #side-menu {
-        width: 100%; height: 100vh; right: 0; left: auto;
-        background-color: #000; border: none; flex-direction: column;
-        justify-content: center; transform: translateX(100%); transition: transform 0.4s ease-in-out;
-    }
-    #side-menu.active { transform: translateX(0); }
-    #side-menu ul { gap: 30px; display: flex; flex-direction: column; }
-    #side-menu a { font-size: 1.5rem; padding: 15px; }
-
-    body::after {
-        background-position: center center !important;
-        -webkit-mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
-        mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
-    }
-
-    #text-container { bottom: 20%; }
-    #text-container h1 { font-size: 6rem; }
-
-    #localization-container {
-        position: relative; top: 80px; left: auto; transform: none;
-        width: 90%; height: auto; margin: 0 auto 50px auto;
-        flex-direction: column-reverse; padding: 20px;
-    }
-    #info-box { padding-right: 0; margin-top: 20px; text-align: center; }
-    #info-box h1 { font-size: 3.5rem; }
-    #map-box { width: 100%; height: 300px; flex: none; }
-
-    #paper-container {
-        position: relative; top: 80px; left: auto; transform: none;
-        width: 90%; margin: 0 auto 50px auto; flex-direction: column;
-        padding: 40px 25px; gap: 30px; outline: none; border: 1px solid #333;
-    }
-    .paper-content h1 { font-size: 4rem; text-align: center; }
-    .paper-content { text-align: center; }
-    .big-tak { font-size: 2.5rem; }
-    .paper-image { width: 100%; margin: 0 auto; border: 1px solid #d4af37; }
-
-    /* MENU MOBILE */
     #paper-container.menu-layout {
         flex-direction: column;
         gap: 30px;
         padding: 30px 20px;
     }
-
     .menu-column-left {
         width: 100%;
         padding-right: 0;
@@ -373,19 +378,215 @@ body.blur-mode::before {
         border-bottom: 1px solid rgba(212, 175, 55, 0.3);
         padding-bottom: 30px;
     }
+    .menu-column-right { width: 100%; padding-left: 0; }
+    .sala-image-right { width: 100%; margin-top: 20px; }
+    .menu-column-left h1, .menu-column-right h1 { font-size: 3rem; }
+}
 
-    .menu-column-right {
-        width: 100%;
-        padding-left: 0;
+
+/* =========================================
+   10. GALERIA (gallery.html)
+   ========================================= */
+
+#paper-container.gallery-layout {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    height: auto;
+    min-height: 80vh;
+}
+
+#paper-container.gallery-layout h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4rem;
+    color: #d4af37;
+    margin-bottom: 50px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* Siatka dla boksów */
+.gallery-grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Wyrównanie do dołu */
+    gap: 80px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+/* --- POJEDYNCZY BOKS --- */
+.gallery-box {
+    width: 300px;
+    height: auto;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.gallery-box h3 {
+    font-family: 'Playfair Display', serif;
+    color: #d4af37;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* --- RAMKI ZDJĘĆ --- */
+.slider-wrapper {
+    width: 100%;
+    height: 200px; /* Poziome zdjęcie */
+    position: relative;
+    border: 1px solid #d4af37;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* SPECJALNA RAMKA DLA "MY" (PIONOWA) */
+#box-my .slider-wrapper {
+    height: 450px;
+    width: 300px;
+}
+
+.slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    opacity: 1; /* Dla efektu fade w JS */
+    transition: opacity 0.2s ease-in-out;
+}
+
+.slide-img:hover {
+    transform: scale(1.05);
+}
+
+/* --- STRZAŁKI NA ZEWNĄTRZ --- */
+.arrow {
+    position: absolute;
+    top: 60%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    color: #d4af37;
+    border: none;
+    font-size: 2.5rem;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.arrow.prev { left: -50px; }
+.arrow.next { right: -50px; }
+
+.arrow:hover {
+    color: #fff;
+    transform: translateY(-50%) scale(1.2);
+}
+
+#box-my .arrow { top: 55%; }
+
+
+/* --- MODAL (PC: 2 RZĘDY) --- */
+#gallery-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(8px);
+
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-scroll-container {
+    display: flex;
+    flex-wrap: wrap; /* Pozwala na łamanie linii = 2 rzędy */
+    justify-content: center;
+    align-content: center;
+    gap: 30px;
+
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; /* Przewijanie jeśli się nie zmieści */
+    padding: 40px;
+
+    scrollbar-width: thin;
+    scrollbar-color: #d4af37 #111;
+}
+
+.modal-scroll-container img {
+    /* PC: Wysokość 40% ekranu. 40% + 40% + odstępy = ok. 100%, czyli 2 rzędy */
+    height: 40vh;
+    width: auto;
+    max-width: 45%; /* Maksymalnie połowa szerokości */
+
+    object-fit: contain;
+    border: 1px solid #d4af37;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    border-radius: 2px;
+
+    animation: fadeIn 0.4s ease-out;
+}
+
+/* Przycisk X */
+#close-modal {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    font-size: 4rem;
+    color: #888;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10000;
+    line-height: 1;
+    transition: 0.3s;
+}
+
+#close-modal:hover { color: #d4af37; transform: rotate(90deg); }
+
+
+/* --- RESPONSYWNOŚĆ --- */
+@media (max-width: 768px) {
+    .gallery-grid {
+        gap: 30px;
+        flex-direction: column;
+        align-items: center;
     }
 
-    .sala-image-right {
-        width: 100%;
-        margin-top: 20px;
+    /* Strzałki bliżej na telefonie */
+    .arrow.prev { left: -10px; background: rgba(0,0,0,0.5); border-radius: 50%; padding: 5px 10px; font-size: 1.5rem; }
+    .arrow.next { right: -10px; background: rgba(0,0,0,0.5); border-radius: 50%; padding: 5px 10px; font-size: 1.5rem; }
+
+    #box-my .slider-wrapper { height: 400px; width: 280px; }
+
+    /* --- MODAL (MOBILE: JEDNO POD DRUGIM) --- */
+    .modal-scroll-container {
+        flex-wrap: nowrap; /* Wyłączamy rzędy */
+        flex-direction: column; /* Wymuszamy pion */
+        justify-content: flex-start; /* Od góry */
+        align-items: center;
+
+        padding-top: 80px; /* Miejsce na X */
+        gap: 30px;
     }
 
-    .menu-column-left h1,
-    .menu-column-right h1 {
-        font-size: 3rem;
+    .modal-scroll-container img {
+        height: auto; /* Wysokość automatyczna */
+        width: 90%;   /* Szerokość prawie całego ekranu */
+        max-width: none;
+        max-height: none;
     }
 }
