@@ -211,11 +211,29 @@ body.blur-mode::before {
    8. RESPONSYWNOŚĆ GLOBALNA (MOBILE)
    ========================================= */
 @media (max-width: 768px) {
+
+    /* --- NAPRAWA PRZEWIJANIA NA TELEFONIE --- */
+    html, body {
+        overflow-y: auto !important; /* Odblokowuje przewijanie pionowe */
+        height: auto !important;     /* Pozwala stronie rosnąć w dół */
+        min-height: 100%;            /* Gwarantuje, że tło pokryje całość */
+        -webkit-overflow-scrolling: touch; /* Płynne przewijanie na iPhone */
+    }
+
+    /* Tło na telefonie musi być "fixed", żeby nie ucinało go przy przewijaniu */
+    body::before, body::after {
+        position: fixed !important;
+        height: 100vh !important;
+    }
+
+    /* --- Reszta stylów mobilnych bez zmian --- */
     #hamburger { display: block; }
+
     #side-menu {
         width: 100%; height: 100vh; right: 0; left: auto;
         background-color: #000; border: none; flex-direction: column;
         justify-content: center; transform: translateX(100%); transition: transform 0.4s ease-in-out;
+        position: fixed; /* Menu musi być fixed, żeby nie uciekało przy przewijaniu */
     }
     #side-menu.active { transform: translateX(0); }
     #side-menu ul { gap: 30px; display: flex; flex-direction: column; }
@@ -249,6 +267,50 @@ body.blur-mode::before {
     .paper-content { text-align: center; }
     .big-tak { font-size: 2.5rem; }
     .paper-image { width: 100%; margin: 0 auto; border: 1px solid #d4af37; }
+
+    /* Menu Mobile */
+    #paper-container.menu-layout {
+        flex-direction: column;
+        gap: 30px;
+        padding: 30px 20px;
+    }
+    .menu-column-left {
+        width: 100%;
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        padding-bottom: 30px;
+    }
+    .menu-column-right { width: 100%; padding-left: 0; }
+    .sala-image-right { width: 100%; margin-top: 20px; }
+    .menu-column-left h1, .menu-column-right h1 { font-size: 3rem; }
+
+    /* Galeria Mobile */
+    .gallery-grid {
+        gap: 30px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .arrow.prev { left: -10px; background: rgba(0,0,0,0.5); border-radius: 50%; padding: 5px 10px; font-size: 1.5rem; }
+    .arrow.next { right: -10px; background: rgba(0,0,0,0.5); border-radius: 50%; padding: 5px 10px; font-size: 1.5rem; }
+
+    #box-my .slider-wrapper { height: 400px; width: 280px; }
+
+    /* Modal Mobile */
+    .modal-scroll-container {
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 80px;
+        gap: 30px;
+    }
+    .modal-scroll-container img {
+        height: auto;
+        width: 90%;
+        max-width: none;
+        max-height: none;
+    }
 }
 
 
