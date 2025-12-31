@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // 1. Generowanie tablicy zdjęć
+
     const images = [];
 
-    // Dodaj pierwsze zdjęcie
+
     images.push('tlo/tlo.webp');
 
-    // Dodaj kolejne zdjęcia
+
     const numberedImagesCount = 32;
 
     for (let i = 1; i <= numberedImagesCount; i++) {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const intervalTime = 10000; // 10 sekund
 
-    // 2. Logika zmiany
+    //  Logika zmiany
     let currentIndex = 0;
     const totalImages = images.length;
 

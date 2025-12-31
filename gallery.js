@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // 1. DANE: Ścieżki do zdjęć
+    // DANE: Ścieżki do zdjęć
     const galleries = {
         slub: [
             'galeria/slub/slub.webp',
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         my:   { index: 0, interval: null }
     };
 
-    // 2. FUNKCJE SLIDERA
+    //  FUNKCJE SLIDERA
 
     function showImage(category) {
         const box = document.getElementById(`box-${category}`);
@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentIndex = state[category].index;
         const imgPath = galleries[category][currentIndex];
 
-        // Dodajemy klasę fade dla płynnego przejścia (opcjonalne, wymaga CSS)
         imgElement.style.opacity = 0;
         setTimeout(() => {
             imgElement.src = imgPath;
@@ -65,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function startAutoSlide(category) {
         if (state[category].interval) clearInterval(state[category].interval);
 
-        // ZMIANA: 6000ms = 6 sekund
+        // ZMIANA
         state[category].interval = setInterval(() => {
             nextSlide(category);
         }, 6000);

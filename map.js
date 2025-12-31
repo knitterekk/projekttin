@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // Twoje współrzędne
     const lat = 54.20900424000618;
     const lng = 18.521802582894377;
 
