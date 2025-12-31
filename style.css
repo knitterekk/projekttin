@@ -20,14 +20,14 @@ html, body {
 }
 
 /* =========================================
-   2. TŁO STRONY
+   2. TŁO STRONY (POPRAWIONE)
    ========================================= */
 body {
     font-family: 'Segoe UI', sans-serif;
     background-color: #000;
     position: relative;
 
-    /* Zdjęcia tła (.webp) */
+    /* Zdjęcia tła (.webp) - zmienne podmieniane przez JS */
     --bg-current: url('tlo/tlo.webp');
     --bg-next: url('tlo/tlo1.webp');
     --bg-prev: url('tlo/tlo32.webp');
@@ -45,29 +45,45 @@ body {
     100% { opacity: 1; }
 }
 
+/* WARSTWA 1 (Pod spodem) - Rozmyta */
 body::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: var(--bg-next), var(--bg-prev);
-    background-size: 50% 100%, 50% 100%;
-    background-position: left center, right center;
-    background-repeat: no-repeat;
-    filter: blur(20px) brightness(0.4);
-    transform: scale(1.1); z-index: -2;
-}
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
 
-body::after {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    /* POPRAWKA: Używamy tego samego zdjęcia co na wierzchu */
     background-image: var(--bg-current);
 
-    /* ZMIANA: 'cover' zapewnia, że zdjęcie zawsze wypełnia ekran bez czarnych pasów */
+    /* POPRAWKA: Rozciągnij na cały ekran i wyśrodkuj */
     background-size: cover;
-    /* ZMIANA: Lekkie przesunięcie w prawo (55%), aby para na zdjęciu była bliżej tekstu na PC */
-    background-position: 55% bottom;
+    background-position: center center;
+
+    background-repeat: no-repeat;
+    filter: blur(25px) brightness(0.4); /* Mocne rozmycie */
+    transform: scale(1.1); /* Lekkie powiększenie, żeby ukryć krawędzie rozmycia */
+    z-index: -2;
+}
+
+/* WARSTWA 2 (Na wierzchu) - Ostra */
+body::after {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+
+    background-image: var(--bg-current);
+
+    /* POPRAWKA: Rozciągnij na cały ekran (bez czarnych pasów) */
+    background-size: cover;
+
+    /* POPRAWKA: Ustaw idealnie na środku (rozwiązuje problem rozjeżdżania) */
+    background-position: center center;
 
     background-repeat: no-repeat;
     z-index: -1;
-    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
-    mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+
+    /* Maska / Winieta */
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 95%);
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 95%);
 }
 
 body.anim-active::before { animation: fadeIn 1.5s ease-out forwards; }
@@ -120,9 +136,8 @@ body.blur-mode::before {
    ========================================= */
 #text-container {
     position: absolute;
-    /* Elastyczny odstęp od dołu */
     bottom: 5%;
-    /* Przesunięcie środka w prawo o połowę szerokości menu (125px), by ominąć pasek boczny */
+    /* Przesunięcie środka w prawo o połowę szerokości menu (125px) */
     left: calc(50% + 125px);
     transform: translateX(-50%);
 
@@ -130,14 +145,12 @@ body.blur-mode::before {
 }
 #text-container h1 {
     font-family: 'Mr De Haviland', cursive;
-    /* CLAMP: Czcionka skaluje się płynnie między 3.5rem a 8rem */
     font-size: clamp(3.5rem, 9vw, 8rem);
     font-weight: 400; margin: 0; line-height: 1;
     text-shadow: 0 4px 15px rgba(0,0,0,1);
 }
 #text-container h2 {
     font-family: 'Mr De Haviland', cursive;
-    /* CLAMP: Data skaluje się płynnie */
     font-size: clamp(2rem, 4vw, 4rem);
     font-weight: 400; margin-top: 5px; opacity: 0.9;
     text-shadow: 0 4px 15px rgba(0,0,0,1);
@@ -148,7 +161,6 @@ body.blur-mode::before {
    ========================================= */
 #localization-container {
     position: absolute; top: 50%;
-    /* Przesunięcie środka w prawo o 125px */
     left: calc(50% + 125px);
     transform: translate(-50%, -50%);
 
@@ -166,11 +178,10 @@ body.blur-mode::before {
 #map { width: 100%; height: 100%; }
 
 /* =========================================
-   7. STRONA ŚLUB (about.html) I POZOSTAŁE KONTENERY
+   7. STRONA ŚLUB (about.html)
    ========================================= */
 #paper-container {
     position: absolute; top: 50%;
-    /* Przesunięcie środka w prawo o 125px */
     left: calc(50% + 125px);
     transform: translate(-50%, -50%);
 
@@ -335,7 +346,7 @@ body.blur-mode::before {
    ========================================= */
 @media (max-width: 768px) {
 
-    /* 1. ODBLOKOWANIE PRZEWIJANIA (Kluczowe dla mobile) */
+    /* 1. ODBLOKOWANIE PRZEWIJANIA */
     html, body {
         width: 100%;
         height: auto !important;
@@ -351,7 +362,7 @@ body.blur-mode::before {
         height: 100vh !important;
         top: 0; left: 0; width: 100%;
         /* Reset pozycji tła na środek dla mobile */
-        background-position: center bottom !important;
+        background-position: center center !important;
     }
 
     /* 2. MENU */
