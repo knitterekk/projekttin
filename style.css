@@ -17,7 +17,7 @@ html, body {
     overflow: hidden;
 }
 
-/*  TŁO STRONY */
+/* TŁO STRONY */
 
 body {
     font-family: 'Segoe UI', sans-serif;
@@ -73,12 +73,12 @@ body::after {
     z-index: -1;
 
     /* Maska (Winieta) - środek ostry, boki przezroczyste */
-    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 95%);
-    mask-image: radial-gradient(ellipse at center, black 40%, transparent 95%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
 }
 
 body.anim-active::before { animation: fadeIn 1.5s ease-out forwards; }
-body.anim-active::after { animation: slideFromLeft 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+body.anim-active::after { animation: fadeIn 1.5s ease-out forwards; }
 
 body.blur-mode::after { display: none; }
 body.blur-mode::before {
@@ -119,7 +119,7 @@ body.blur-mode::before {
 #hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -8px); }
 
 
-/*  STRONA GŁÓWNA */
+/* STRONA GŁÓWNA */
 #text-container {
     position: absolute;
     bottom: 5%;
@@ -158,7 +158,7 @@ body.blur-mode::before {
 #map-box { flex: 1.5; height: 100%; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.3); }
 #map { width: 100%; height: 100%; }
 
-/*  STRONA ŚLUB (about.html) */
+/* STRONA ŚLUB (about.html) */
 #paper-container {
     position: absolute; top: 50%;
     left: calc(50% + 125px);
@@ -208,7 +208,7 @@ body.blur-mode::before {
 .paper-image img { width: 100%; height: auto; display: block; }
 
 
-/*  SEKCJA MENU I ATRAKCJE */
+/* SEKCJA MENU I ATRAKCJE */
 #paper-container.menu-layout {
     align-items: flex-start;
     min-height: 80vh;
