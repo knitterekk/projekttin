@@ -48,14 +48,14 @@ body::before {
     background-position: left center, right center;
     background-repeat: no-repeat;
     filter: blur(20px) brightness(0.4);
-    transform: scale(1.1); z-index: -2;
+    transform: scale(1.1); z-index: 1;
 }
 
 body::after {
     content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-image: var(--bg-current);
     background-size: contain; background-repeat: no-repeat;
-    background-position: center; z-index: -1;
+    background-position: center; z-index: 2;
     -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
     mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
 }
@@ -101,22 +101,22 @@ body.blur-mode::before {
 #hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -8px); }
 
 
-/* STRONA GŁÓWNA */
 #text-container {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center; color: #fff; z-index: 10; width: 100%;
+    transform: translate3d(-50%, -50%, 0);
+    will-change: transform;
+    text-align: center; color: #d4af37; z-index: 9999; width: 100%;
 }
 #text-container h1 {
-    font-family: 'Mr De Haviland', cursive;
+    font-family: 'Great Vibes', cursive;
     font-size: 7rem;
     font-weight: 400; margin: 0; line-height: 1;
-    text-shadow: 0 4px 15px rgba(0,0,0,1);
+    text-shadow: 2px 2px 10px #000, 0 0 20px rgba(0,0,0,0.8);
 }
 #text-container h2 {
-    font-family: 'Mr De Haviland', cursive;
+    font-family: 'Great Vibes', cursive;
     font-size: 3.5rem;
     font-weight: 400; margin-top: 5px; opacity: 0.9;
     text-shadow: 0 4px 15px rgba(0,0,0,1);
