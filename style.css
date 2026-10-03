@@ -12,8 +12,9 @@
 
 html, body {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /* TŁO STRONY */
@@ -41,7 +42,7 @@ body {
 }
 
 body::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-image: var(--bg-next), var(--bg-prev);
     background-size: 50% 100%, 50% 100%;
     background-position: left center, right center;
@@ -51,10 +52,10 @@ body::before {
 }
 
 body::after {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-image: var(--bg-current);
     background-size: contain; background-repeat: no-repeat;
-    background-position: center bottom; z-index: -1;
+    background-position: center; z-index: -1;
     -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
     mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
 }
@@ -102,10 +103,10 @@ body.blur-mode::before {
 
 /* STRONA GŁÓWNA */
 #text-container {
-    position: absolute; bottom: 30px;
-
-    left: calc(50% + 125px);
-    transform: translateX(-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center; color: #fff; z-index: 10; width: 100%;
 }
 #text-container h1 {
@@ -123,10 +124,9 @@ body.blur-mode::before {
 
 /*  LOKALIZACJA */
 #localization-container {
-    position: absolute; top: 50%;
-
-    left: calc(50% + 125px);
-    transform: translate(-50%, -50%);
+    position: relative;
+    margin: 10vh auto;
+    left: 125px;
 
     width: 70%; max-width: 1100px; height: 70vh;
     display: flex; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
@@ -143,9 +143,9 @@ body.blur-mode::before {
 
 /*  STRONA ŚLUB (about.html) */
 #paper-container {
-    position: absolute; top: 50%;
-    left: calc(50% + 125px);
-    transform: translate(-50%, -50%);
+    position: relative;
+    margin: 10vh auto;
+    left: 125px;
 
     width: 70%; max-width: 1000px; height: auto; min-height: 60vh;
     background-color: #1f1f1f; box-shadow: 0 20px 50px rgba(0,0,0,0.8);
@@ -194,7 +194,7 @@ body.blur-mode::before {
 
 /* SEKCJA MENU  */
 #paper-container.menu-layout {
-    align-items: flex-start;
+    align-items: stretch;
     min-height: 80vh;
     padding: 50px;
     flex-wrap: wrap;
@@ -249,7 +249,7 @@ body.blur-mode::before {
     margin-bottom: 50px; text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 .gallery-grid {
-    display: flex; justify-content: center; align-items: flex-end; gap: 80px; width: 100%; flex-wrap: wrap;
+    display: flex; justify-content: center; align-items: flex-end; column-gap: 80px; row-gap: 60px; width: 100%; flex-wrap: wrap;
 }
 .gallery-box {
     width: 300px; height: auto; background: transparent; display: flex; flex-direction: column;
@@ -272,9 +272,10 @@ body.blur-mode::before {
     position: absolute; top: 60%; transform: translateY(-50%); background-color: transparent;
     color: #d4af37; border: none; font-size: 2.5rem; padding: 10px; cursor: pointer; z-index: 10;
     transition: transform 0.2s, color 0.2s;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
-.arrow.prev { left: -50px; }
-.arrow.next { right: -50px; }
+.arrow.prev { left: -25px; }
+.arrow.next { right: -25px; }
 .arrow:hover { color: #fff; transform: translateY(-50%) scale(1.2); }
 #box-my .arrow { top: 55%; }
 
@@ -333,11 +334,11 @@ body.blur-mode::before {
     #side-menu a { font-size: 1.5rem; padding: 15px; }
 
     #text-container {
-        /* Wymuszamy, żeby napis był przyklejony do dołu ekranu i widoczny */
+        /* Wymuszamy, żeby napis był na środku ekranu */
         position: fixed !important;
-        bottom: 25% !important;
+        top: 50% !important;
         left: 50% !important;
-        transform: translateX(-50%) !important;
+        transform: translate(-50%, -50%) !important;
         width: 100%;
         z-index: 50;
         display: block !important;
