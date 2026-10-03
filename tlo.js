@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    alert("Test: Czy ten komunikat się wyświetla? Jeśli tak, kod z projekttin działa.");
-
+    
     const images = [];
 
 
