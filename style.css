@@ -5,6 +5,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
 
+:root {
+    --col-bg: #2d3421; /* Ciemniejsza wersja oliwkowego z palety dla kontrastu */
+    --col-paper-bg: #54603f; /* Najciemniejszy z palety (oliwka) */
+    --col-bg-hover: #455033;
+    --col-text-light: #eed6a8; /* Jasny kremowy z palety */
+    --col-accent1: #d89127; /* Musztardowy */
+    --col-accent2: #d05c24; /* Pomara�czowy */
+    --col-accent3: #d7676c; /* Koralowy r� */
+    --col-accent4: #ce3e65; /* Malina */
+    --col-accent5: #900b2e; /* Bordowy */
+    --col-accent6: #8f9882; /* Jasna sza�wia */
+}
 * {
     box-sizing: border-box;
     margin: 0;
@@ -21,7 +33,7 @@ html, body {
 /* TŁO STRONY */
 body {
     font-family: 'Segoe UI', sans-serif;
-    background-color: #000;
+    background-color: var(--col-bg);
     position: relative;
 
     /* Zdjęcia tła */
@@ -29,7 +41,7 @@ body {
     --bg-next: url('tlo/tlo1.webp');
     --bg-prev: url('tlo/tlo32.webp');
 
-    box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
+    box-shadow: inset 0 0 100px rgba(45, 52, 33, 0.9);
 }
 
 @keyframes slideFromLeft {
@@ -75,17 +87,17 @@ body.blur-mode::before {
 /*  MENU BOCZNE */
 #side-menu {
     position: fixed; left: 0; top: 0; height: 100%; width: 250px;
-    background-color: #000; border-right: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: var(--col-bg); border-right: 1px solid rgba(238, 214, 168, 0.2);
     display: flex; align-items: center; justify-content: center; z-index: 100;
 }
 #side-menu ul { list-style: none; text-align: center; width: 100%; }
 #side-menu li { margin: 25px 0; }
 #side-menu a {
-    text-decoration: none; color: #fff; font-size: 1.2rem;
+    text-decoration: none; color: var(--col-text-light); font-size: 1.2rem;
     font-weight: 400; text-transform: uppercase; letter-spacing: 2px;
     transition: all 0.3s ease; display: block; padding: 10px;
 }
-#side-menu a:hover { color: #fff; background-color: #222; transform: translateX(5px); }
+#side-menu a:hover { color: var(--col-accent1); background-color: var(--col-bg-hover); transform: translateX(5px); }
 
 /*  HAMBURGER (MOBILE) */
 #hamburger {
@@ -93,7 +105,7 @@ body.blur-mode::before {
     background: transparent; border: none; cursor: pointer; width: 40px; height: 40px;
 }
 #hamburger span {
-    display: block; width: 100%; height: 3px; background-color: #fff;
+    display: block; width: 100%; height: 3px; background-color: var(--col-text-light);
     margin: 7px 0; border-radius: 2px; transition: all 0.3s ease;
     box-shadow: 0 1px 4px rgba(0,0,0,1);
 }
@@ -107,14 +119,14 @@ body.blur-mode::before {
     bottom: 15vh;
     left: 50%;
     transform: translateX(-50%);
-    text-align: center; color: #fff; z-index: 2147483647;
+    text-align: center; color: var(--col-text-light); z-index: 2147483647;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
 }
 #text-container h1 {
     font-family: 'Alex Brush', cursive;
     font-size: 12vmin;
     font-weight: 400; margin: 0; line-height: 1;
-    text-shadow: 2px 2px 10px #000, 0 0 20px rgba(0,0,0,0.8);
+    text-shadow: 2px 2px 10px var(--col-bg), 0 0 20px rgba(14, 1, 4, 0.6);
 }
 #text-container h2 {
     font-family: 'Alex Brush', cursive;
@@ -130,16 +142,16 @@ body.blur-mode::before {
     left: 125px;
 
     width: 70%; max-width: 1100px; height: 70vh;
-    display: flex; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 15px;
-    padding: 40px; color: #fff; z-index: 10;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    display: flex; background: rgba(45, 52, 33, 0.85); backdrop-filter: blur(10px);
+    border: 1px solid rgba(238, 214, 168, 0.15); border-radius: 15px;
+    padding: 40px; color: var(--col-text-light); z-index: 10;
+    box-shadow: 0 20px 50px rgba(45, 52, 33, 0.8);
 }
 #info-box { flex: 1; padding-right: 40px; display: flex; flex-direction: column; justify-content: center; }
-#info-box h1 { font-family: 'Great Vibes', cursive; font-size: 4rem; margin-bottom: 25px; color: #fff; }
-#info-box p { font-size: 1.2rem; line-height: 1.6; margin: 8px 0; color: #ddd; }
-#info-box .venue-name { font-weight: 600; font-size: 1.6rem; color: #fff; margin-bottom: 15px; }
-#map-box { flex: 1.5; height: 100%; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.3); }
+#info-box h1 { font-family: 'Great Vibes', cursive; font-size: 4rem; margin-bottom: 25px; color: var(--col-text-light); }
+#info-box p { font-size: 1.2rem; line-height: 1.6; margin: 8px 0; color: var(--col-text-light); }
+#info-box .venue-name { font-weight: 600; font-size: 1.6rem; color: var(--col-text-light); margin-bottom: 15px; }
+#map-box { flex: 1.5; height: 100%; border-radius: 10px; overflow: hidden; border: 1px solid rgba(238, 214, 168, 0.3); }
 #map { width: 100%; height: 100%; }
 
 /*  STRONA ŚLUB (about.html) */
@@ -149,46 +161,46 @@ body.blur-mode::before {
     left: 125px;
 
     width: 70%; max-width: 1000px; height: auto; min-height: 60vh;
-    background-color: #1f1f1f; box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-    border: 1px solid #111; outline: 1px solid #d4af37; outline-offset: -15px;
-    color: #d4af37; padding: 60px; border-radius: 2px;
+    background-color: var(--col-paper-bg); box-shadow: 0 20px 50px rgba(14, 1, 4, 0.6);
+    border: 1px solid var(--col-bg); outline: 1px solid var(--col-accent1); outline-offset: -15px;
+    color: var(--col-accent1); padding: 60px; border-radius: 2px;
     display: flex; gap: 50px; align-items: center; z-index: 10;
 }
 .paper-content { flex: 1.5; z-index: 2; }
 .paper-content h1 {
     font-family: 'Great Vibes', cursive; font-size: 4.5rem;
-    margin-bottom: 30px; color: #d4af37; line-height: 1;
-    text-align: left; text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    margin-bottom: 30px; color: var(--col-accent1); line-height: 1;
+    text-align: left; text-shadow: 0 2px 5px rgba(45, 52, 33, 0.8);
 }
 .paper-content h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
-    color: #d4af37; margin-top: 30px; margin-bottom: 10px;
+    color: var(--col-accent1); margin-top: 30px; margin-bottom: 10px;
     text-transform: uppercase; letter-spacing: 2px; font-weight: 400;
 }
 .paper-content p {
     font-family: 'Segoe UI', sans-serif; font-size: 1.1rem;
-    line-height: 1.8; margin-bottom: 15px; color: #f1e5ac; font-weight: 300;
+    line-height: 1.8; margin-bottom: 15px; color: var(--col-text-light); font-weight: 300;
 }
 .paper-content .intro {
-    font-style: italic; font-size: 1.8rem; color: #d4af37;
+    font-style: italic; font-size: 1.8rem; color: var(--col-accent1);
     font-family: 'Great Vibes', cursive; font-weight: 400;
     line-height: 1.4; text-align: center;
 }
 .big-tak {
     display: block; text-align: center; font-size: 3rem;
-    margin-top: 15px; margin-bottom: 15px; color: #d4af37;
+    margin-top: 15px; margin-bottom: 15px; color: var(--col-accent1);
     font-family: 'Great Vibes', cursive;
-    text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    text-shadow: 0 0 15px rgba(216, 145, 39, 0.3);
 }
 .separator {
     border: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    background: linear-gradient(90deg, transparent, var(--col-accent1), transparent);
     margin: 30px 0; width: 100%;
 }
 .paper-image {
-    flex: 1; position: relative; border: 1px solid #d4af37;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5); transform: rotate(0deg);
+    flex: 1; position: relative; border: 1px solid var(--col-accent1);
+    box-shadow: 0 5px 20px rgba(45, 52, 33, 0.8); transform: rotate(0deg);
 }
 .paper-image img { width: 100%; height: auto; display: block; }
 
@@ -201,39 +213,39 @@ body.blur-mode::before {
     flex-wrap: wrap;
 }
 .menu-column-left {
-    flex: 1 1 45%; padding-right: 40px; border-right: 1px solid rgba(212, 175, 55, 0.3); text-align: center;
+    flex: 1 1 45%; padding-right: 40px; border-right: 1px solid rgba(216, 145, 39, 0.3); text-align: center;
 }
 .menu-column-left h1, .menu-column-right h1 {
-    font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #d4af37; margin-bottom: 30px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); line-height: 1;
+    font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--col-accent1); margin-bottom: 30px; text-shadow: 0 2px 5px rgba(45, 52, 33, 0.8); line-height: 1;
 }
 .menu-section h3 {
-    font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #d4af37; letter-spacing: 1px;
-    margin-bottom: 8px; font-weight: 400; font-style: italic; border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--col-accent1); letter-spacing: 1px;
+    margin-bottom: 8px; font-weight: 400; font-style: italic; border-bottom: 1px solid rgba(216, 145, 39, 0.1);
     display: inline-block; padding-bottom: 2px;
 }
 .dish-name {
-    font-family: 'Playfair Display', serif !important; font-weight: 600 !important; color: #cbb470 !important;
+    font-family: 'Playfair Display', serif !important; font-weight: 600 !important; color: var(--col-accent2) !important;
     font-size: 1.1rem !important; margin-bottom: 2px !important; margin-top: 10px;
 }
 .menu-section p {
-    font-family: 'Segoe UI', sans-serif; font-size: 0.95rem; color: #f1e5ac; line-height: 1.5; margin: 0; font-weight: 300;
+    font-family: 'Segoe UI', sans-serif; font-size: 0.95rem; color: var(--col-text-light); line-height: 1.5; margin: 0; font-weight: 300;
 }
 .separator-small {
-    width: 30%; height: 1px; background: rgba(212, 175, 55, 0.3); margin: 20px auto;
+    width: 30%; height: 1px; background: rgba(216, 145, 39, 0.3); margin: 20px auto;
 }
 .menu-column-right {
     flex: 1 1 45%; padding-left: 40px; display: flex; flex-direction: column; text-align: center;
 }
 .attraction-text h3 {
-    font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #d4af37; margin-top: 20px;
+    font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--col-accent1); margin-top: 20px;
     margin-bottom: 5px; font-weight: 600; letter-spacing: 1px;
 }
 .attraction-text p {
-    font-family: 'Segoe UI', sans-serif; font-size: 1rem; color: #f1e5ac; line-height: 1.4; font-weight: 300;
+    font-family: 'Segoe UI', sans-serif; font-size: 1rem; color: var(--col-text-light); line-height: 1.4; font-weight: 300;
 }
 .sala-image-right {
-    width: 100%; margin-top: 30px; position: relative; border: 1px solid #d4af37;
-    padding: 3px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); display: flex; justify-content: center;
+    width: 100%; margin-top: 30px; position: relative; border: 1px solid var(--col-accent1);
+    padding: 3px; box-shadow: 0 5px 20px rgba(45, 52, 33, 0.8); display: flex; justify-content: center;
 }
 .sala-image-right img {
     width: 100%; max-height: 350px; object-fit: cover; display: block; opacity: 0.95;
@@ -246,8 +258,8 @@ body.blur-mode::before {
     padding: 40px; height: auto; min-height: 80vh;
 }
 #paper-container.gallery-layout h1 {
-    font-family: 'Great Vibes', cursive; font-size: 4rem; color: #d4af37;
-    margin-bottom: 50px; text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--col-accent1);
+    margin-bottom: 50px; text-shadow: 0 2px 5px rgba(45, 52, 33, 0.8);
 }
 .gallery-grid {
     display: flex; justify-content: center; align-items: flex-end; column-gap: 80px; row-gap: 60px; width: 100%; flex-wrap: wrap;
@@ -257,12 +269,12 @@ body.blur-mode::before {
     align-items: center; position: relative; margin-bottom: 20px;
 }
 .gallery-box h3 {
-    font-family: 'Playfair Display', serif; color: #d4af37; font-size: 1.3rem; margin-bottom: 15px;
+    font-family: 'Playfair Display', serif; color: var(--col-accent1); font-size: 1.3rem; margin-bottom: 15px;
     text-transform: uppercase; letter-spacing: 2px;
 }
 .slider-wrapper {
-    width: 100%; height: 200px; position: relative; border: 1px solid #d4af37;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5); overflow: hidden; background-color: #000;
+    width: 100%; height: 200px; position: relative; border: 1px solid var(--col-accent1);
+    box-shadow: 0 5px 20px rgba(45, 52, 33, 0.8); overflow: hidden; background-color: var(--col-bg);
 }
 #box-my .slider-wrapper { height: 450px; width: 300px; }
 .slide-img {
@@ -271,34 +283,34 @@ body.blur-mode::before {
 .slide-img:hover { transform: scale(1.05); }
 .arrow {
     position: absolute; top: 60%; transform: translateY(-50%); background-color: transparent;
-    color: #d4af37; border: none; font-size: 2.5rem; padding: 10px; cursor: pointer; z-index: 10;
+    color: var(--col-accent1); border: none; font-size: 2.5rem; padding: 10px; cursor: pointer; z-index: 10;
     transition: transform 0.2s, color 0.2s;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    text-shadow: 0 2px 4px rgba(14, 1, 4, 0.6);
 }
 .arrow.prev { left: -25px; }
 .arrow.next { right: -25px; }
-.arrow:hover { color: #fff; transform: translateY(-50%) scale(1.2); }
+.arrow:hover { color: var(--col-text-light); transform: translateY(-50%) scale(1.2); }
 #box-my .arrow { top: 55%; }
 
 /* Modal */
 #gallery-modal {
     display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;
-    background-color: rgba(0, 0, 0, 0.95); backdrop-filter: blur(8px);
+    background-color: rgba(45, 52, 33, 0.95); backdrop-filter: blur(8px);
     justify-content: center; align-items: center; padding: 20px;
 }
 .modal-scroll-container {
     display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: 30px;
-    width: 100%; height: 100%; overflow-y: auto; padding: 40px; scrollbar-width: thin; scrollbar-color: #d4af37 #111;
+    width: 100%; height: 100%; overflow-y: auto; padding: 40px; scrollbar-width: thin; scrollbar-color: var(--col-accent1) var(--col-bg);
 }
 .modal-scroll-container img {
-    height: 40vh; width: auto; max-width: 45%; object-fit: contain; border: 1px solid #d4af37;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5); border-radius: 2px; animation: fadeIn 0.4s ease-out;
+    height: 40vh; width: auto; max-width: 45%; object-fit: contain; border: 1px solid var(--col-accent1);
+    box-shadow: 0 5px 20px rgba(45, 52, 33, 0.8); border-radius: 2px; animation: fadeIn 0.4s ease-out;
 }
 #close-modal {
     position: absolute; top: 20px; right: 40px; font-size: 4rem; color: #888; background: transparent;
     border: none; cursor: pointer; z-index: 10000; line-height: 1; transition: 0.3s;
 }
-#close-modal:hover { color: #d4af37; transform: rotate(90deg); }
+#close-modal:hover { color: var(--col-accent1); transform: rotate(90deg); }
 
 
 /*  RESPONSYWNOŚĆ (MOBILE) */
@@ -326,7 +338,7 @@ body.blur-mode::before {
 
     #side-menu {
         width: 100%; height: 100vh; right: 0; left: auto;
-        background-color: #000; border: none; flex-direction: column;
+        background-color: var(--col-bg); border: none; flex-direction: column;
         justify-content: center; transform: translateX(100%); transition: transform 0.4s ease-in-out;
         position: fixed; top: 0;
     }
@@ -357,7 +369,7 @@ body.blur-mode::before {
         width: 90% !important; height: auto !important;
         margin: 100px auto 50px auto !important;
         flex-direction: column; padding: 40px 25px;
-        gap: 30px; outline: none; border: 1px solid #333;
+        gap: 30px; outline: none; border: 1px solid var(--col-accent1);
     }
 
     #localization-container { flex-direction: column-reverse; padding: 20px; }
@@ -368,13 +380,13 @@ body.blur-mode::before {
     .paper-content h1 { font-size: 4rem; text-align: center; }
     .paper-content { text-align: center; }
     .big-tak { font-size: 2.5rem; }
-    .paper-image { width: 100%; margin: 0 auto; border: 1px solid #d4af37; }
+    .paper-image { width: 100%; margin: 0 auto; border: 1px solid var(--col-accent1); }
 
     /* Menu Layout */
     #paper-container.menu-layout { padding: 30px 20px; }
     .menu-column-left {
         width: 100%; padding-right: 0; border-right: none;
-        border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 30px;
+        border-bottom: 1px solid rgba(216, 145, 39, 0.3); padding-bottom: 30px;
     }
     .menu-column-right { width: 100%; padding-left: 0; }
     .sala-image-right { width: 100%; margin-top: 20px; }
@@ -406,3 +418,5 @@ body.blur-mode::before {
         height: auto; width: 90%; max-width: none; max-height: none;
     }
 }
+
+
